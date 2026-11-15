@@ -29,7 +29,11 @@ function readEnvFile() {
 }
 
 const dotenv = readEnvFile();
-const GA_ID = process.env.PUBLIC_GA_MEASUREMENT_ID ?? dotenv.PUBLIC_GA_MEASUREMENT_ID ?? '';
+const DEFAULT_GA_ID = 'G-KR510SG28B';
+const GA_ID =
+  process.env.PUBLIC_GA_MEASUREMENT_ID ??
+  dotenv.PUBLIC_GA_MEASUREMENT_ID ??
+  DEFAULT_GA_ID;
 const GA_ENABLED = GA_ID.trim() !== '';
 
 const errors = [];
@@ -196,6 +200,15 @@ for (const file of htmlFiles) {
       continue;
     }
     errors.push(`${page}: unexpected client script`);
+  }
+
+  if (GA_ENABLED) {
+    if (!html.includes(`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`)) {
+      errors.push(`${page}: missing GA4 loader for ${GA_ID}`);
+    }
+    if (!/gtag\(["']config["']/.test(html)) {
+      errors.push(`${page}: missing gtag config call`);
+    }
   }
 
   if (/(\bTODO\b|lorem ipsum)/i.test(html)) {

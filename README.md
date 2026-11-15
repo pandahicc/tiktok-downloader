@@ -18,7 +18,7 @@ episodes, and XLSX metadata export.
 | Styling | Tailwind CSS 4.3.x via `@tailwindcss/vite` |
 | Content | Astro Content Collections + MDX (`@astrojs/mdx` 8.x) |
 | Hosting | Cloudflare Workers/Pages or any static host |
-| Client JS | None by default; JSON-LD plus optional GA4 |
+| Client JS | JSON-LD plus GA4 in production builds (`G-KR510SG28B`); no framework client JS |
 | Images | Sharp for icon and Open Graph generation |
 
 The site has no backend, database, CMS, user accounts, or contact form.
@@ -36,6 +36,20 @@ npm run og                          # regenerate public/og/bvt-og.png
 ```
 
 The project requires Node 22.23.4 or newer. `.nvmrc` pins CI to Node 22.
+
+## Analytics
+
+Production builds enable Google Analytics 4 with `G-KR510SG28B` by default. The site
+loads the GA tag from `googletagmanager.com` and sends page views with IP anonymization.
+
+- Override the ID with `PUBLIC_GA_MEASUREMENT_ID`.
+- Set `PUBLIC_GA_MEASUREMENT_ID=` (empty) to disable GA for a build.
+- `npm run dev` does not load GA; the default ID is only applied in production.
+
+The extension itself contains no analytics or telemetry. GA may set `_ga` cookies; the
+Privacy Policy describes this. The site currently loads GA immediately and does not
+include a cookie-consent banner. If EU/UK consent is required, add Consent Mode or a
+banner before launch.
 
 ## Domain
 
@@ -157,3 +171,5 @@ npx wrangler deploy
 - The site uses the current Chrome Web Store screenshots. Replace them with fresh
   English captures when they are available.
 - Plan limits and prices are shown in the extension, not on this site.
+- GA4 loads immediately in production; no cookie-consent banner or Consent Mode is
+  configured.
