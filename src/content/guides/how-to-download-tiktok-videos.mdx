@@ -1,0 +1,116 @@
+---
+title: How to Download a TikTok Video on Desktop
+description: "Use BVT to save a single public TikTok video, choose a filename template, and understand when HD or watermark-free output is actually available."
+pubDate: 2026-11-15
+updatedDate: 2026-11-15
+readingTime: 7
+category: Downloading
+featured: true
+featureHref: /features/single-video-download/
+featureLabel: Single Video Download
+related:
+  - how-to-bulk-download-tiktok-videos
+  - how-to-export-tiktok-video-data-to-excel
+takeaways:
+  - A single download starts from the public video page, not a separate download site.
+  - BVT saves the best source the page exposes; it cannot create an HD source that TikTok does not provide.
+  - Filename templates make saved files easier to find later.
+  - A download is not a license to republish the video.
+draft: false
+---
+
+import Callout from '../../components/Callout.astro';
+
+Saving one TikTok video should be a small task: open the video, click a control, and find the file. The complications are usually about availability, not the click itself. TikTok can expose different sources for different videos, and a page that looks public can still hide the only playable version behind a login wall or a region restriction.
+
+This guide covers the single-video workflow in BVT, the quality and watermark limits, the filename options, and the checks worth doing when a download fails.
+
+<Callout tone="note" title="Quick answer">
+Open a public TikTok video, click the BVT download control, and wait for the progress indicator to finish. The file is saved through the browser’s download flow. If you need a different name, set a filename template before starting.
+</Callout>
+
+## Step 1: Open a public video
+
+Use a video detail page or a supported public feed. Let the page finish rendering before you click anything. BVT injects its control into the page, so a page that is still loading or has been replaced by a login wall may not show the control at all.
+
+Public means you can view the video without signing in. BVT does not bypass a login wall, CAPTCHA, region block, DRM, or other access control. If TikTok will not show you the video as a logged-out visitor, BVT cannot make it available.
+
+## Step 2: Click the BVT download control
+
+The control is placed on supported video elements. When you click it, the extension resolves the available source and starts the download. A progress indicator shows that the request is running.
+
+If you click the active control again while it is running, BVT cancels the current request. Cancelling one download does not affect other downloads or the page.
+
+A download can fail for a few ordinary reasons:
+
+- the page exposes no playable media source;
+- the media URL expired between the page load and the click;
+- the network dropped during the transfer;
+- TikTok changed the page structure and the extension needs an update.
+
+Refresh the page and try again before assuming the video is unavailable.
+
+## What watermark-free and HD mean here
+
+BVT saves the clean source when TikTok exposes one. It does not re-encode the media, paint over a watermark, or reconstruct a higher-quality stream. If the only source TikTok provides already contains a watermark, BVT cannot remove it. If the page only exposes an SD stream, BVT cannot turn it into HD.
+
+That distinction matters for expectations. "Watermark-free HD" is a description of the source the extension can request, not a guarantee for every video. The same account can have videos with different available sources. Always check the saved file before using it in a project.
+
+<Callout tone="warning" title="Availability is not permission">
+A public video can be technically downloadable and still be someone else’s copyrighted work. Downloading it does not give you the right to republish it, use it in an ad, or claim it as your own. Confirm the permission you need.
+</Callout>
+
+## Step 3: Choose a filename that survives the folder
+
+The default filename is usually enough for one video. For a folder with many files, a template makes the difference between a usable archive and a pile of numbers. BVT supports four patterns:
+
+| Template | What it uses |
+|---|---|
+| `title` | The video description, cleaned up for a filename |
+| `date_title` | Publish date followed by the description |
+| `date_vid` | Publish date followed by the video ID |
+| `username_date_title` | Creator username, publish date, and description |
+
+Set the template before you start downloading. A long description can be truncated or cleaned up by the browser; that is normal. If you need a stable unique identifier, use `date_vid`.
+
+## Step 4: Find and verify the file
+
+Single downloads use the browser’s normal download flow. Check the browser’s download list or the destination folder you configured. Then verify:
+
+- the file opens and plays;
+- the resolution is what you expected;
+- the audio is present;
+- the filename matches the template you chose;
+- you have the rights you need for the intended use.
+
+If the file is corrupt or incomplete, refresh the page and retry. A failed transfer is more common than a corrupt file, and a retry usually resolves it.
+
+## Common questions
+
+### Does BVT download audio only?
+
+No. The single-video workflow saves an MP4 video file. There is no audio-only option in this build.
+
+### Can I download a private video?
+
+No. BVT is built for public pages. It does not bypass login, CAPTCHA, region restrictions, DRM, or other access controls.
+
+### Why is the download button missing?
+
+Confirm that BVT is enabled, that you are on a supported public page, and that the page has finished loading. Refresh the page. If the control is still missing, check for an extension update; TikTok changes its page layout periodically.
+
+### Can I cancel a download?
+
+Yes. Click the active BVT control again while the progress indicator is running.
+
+## A short checklist
+
+- ☐ The video is public and the page has finished loading.
+- ☐ BVT is enabled and the download control is visible.
+- ☐ The filename template is set.
+- ☐ The saved file plays and has the expected quality.
+- ☐ You have permission for the intended use.
+
+## Where to go next
+
+For a batch of videos, read [How to Bulk Download TikTok Videos](/guides/how-to-bulk-download-tiktok-videos/). For a creator’s profile, read [How to Download a TikTok Creator’s Videos](/guides/how-to-download-a-tiktok-creators-videos/). The [Single Video Download feature page](/features/single-video-download/) lists the filename and quality details.

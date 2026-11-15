@@ -1,0 +1,167 @@
+---
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../lib/schema';
+import { SITE } from '../data/site';
+
+const title = 'Terms of Use — BVT';
+const description =
+  'The terms that apply to the BVT Chrome extension and this website, including acceptable use, content rights, third-party services, and disclaimers.';
+const lastUpdated = 'November 15, 2026';
+const jsonLd = [
+  breadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'Terms', href: '/terms/' },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/terms/" jsonLd={jsonLd}>
+  <section class="border-b border-slate-200 bg-slate-50">
+    <div class="container-page py-10 sm:py-14">
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Terms', href: '/terms/' },
+        ]}
+      />
+      <div class="mt-8 max-w-3xl">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
+          Legal
+        </p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+          Terms of Use
+        </h1>
+        <p class="mt-5 text-lg leading-8 text-slate-600">
+          These terms apply to the BVT Chrome extension and this website. By installing or
+          using BVT, you agree to them. If you do not agree, do not use the extension.
+        </p>
+        <p class="mt-4 text-sm text-slate-500">Last updated: {lastUpdated}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container-page py-12 sm:py-16">
+    <div class="prose max-w-3xl">
+      <div class="not-prose mb-10 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-950">
+        <p>
+          <strong>Plain-language note:</strong> BVT is a download tool, not a permission
+          slip. A public video can be technically downloadable and still be someone else’s
+          copyrighted work. You are responsible for how you use the files.
+        </p>
+      </div>
+
+      <h2>1. What BVT is</h2>
+      <p>
+        BVT is an independent Chrome extension for downloading public TikTok videos,
+        batch-selecting videos from supported pages, collecting short drama episodes, and
+        exporting selected public metadata to XLSX. It is not affiliated with TikTok,
+        ByteDance, or the Chrome Web Store.
+      </p>
+      <p>
+        BVT works with the page you open and the data that page makes available. It does
+        not provide a complete TikTok archive, a private-content service, or a server-side
+        download service.
+      </p>
+
+      <h2>2. License to use the extension</h2>
+      <p>
+        Subject to these terms, you receive a personal, limited, non-exclusive,
+        non-transferable license to install and use BVT for lawful purposes. You may not
+        reverse engineer, redistribute, resell, sublicense, or modify the extension except
+        where applicable law expressly permits it.
+      </p>
+
+      <h2>3. Acceptable use</h2>
+      <p>You agree not to use BVT to:</p>
+      <ul>
+        <li>download, store, or share content you do not have the rights to use;</li>
+        <li>bypass login, CAPTCHA, region restrictions, DRM, paywalls, or rate limits;</li>
+        <li>harass, stalk, dox, or build profiles of individuals;</li>
+        <li>infringe copyright, trademark, privacy, publicity, or other rights;</li>
+        <li>distribute malware, automate abusive requests, or interfere with TikTok’s services;</li>
+        <li>violate applicable law or TikTok’s terms.</li>
+      </ul>
+      <p>
+        You are responsible for the content you download and for how you use it. BVT does
+        not review, approve, or grant permission for any use.
+      </p>
+
+      <h2>4. Content rights and third-party terms</h2>
+      <p>
+        Videos, audio, images, captions, and metadata belong to their respective owners.
+        Downloading a public video does not give you the right to republish it, use it in
+        advertising, include it in a commercial product, or claim it as your own. Confirm
+        the license or permission you need before using a file.
+      </p>
+      <p>
+        Your use of TikTok is governed by TikTok’s own terms and policies. BVT does not
+        control TikTok’s availability, page structure, rate limits, or decisions about
+        content.
+      </p>
+
+      <h2>5. No affiliation</h2>
+      <p>
+        BVT is not affiliated with, endorsed by, sponsored by, or connected to TikTok or
+        ByteDance. "TikTok" and related marks belong to their respective owners and are
+        used only to describe the platform the extension works with.
+      </p>
+
+      <h2>6. Availability and changes</h2>
+      <p>
+        TikTok changes its pages and endpoints. A feature can stop working after a platform
+        update, and BVT may need an update to restore it. BVT does not guarantee that any
+        page type, video, episode, or field will remain available.
+      </p>
+      <p>
+        We may change, suspend, or discontinue features. We may update these terms; the
+        "Last updated" date will change when we do. Continued use after a change means you
+        accept the updated terms.
+      </p>
+
+      <h2>7. Pro and third-party payments</h2>
+      <p>
+        Pro is an in-app purchase that unlocks the full batch workflow. The current plan
+        and price are shown in the extension before checkout. Payment processing and
+        subscription management are handled by third-party services under their own terms.
+        BVT does not receive or store your card details.
+      </p>
+      <p>
+        Pro does not change which videos TikTok makes available and does not grant rights to
+        use them. A Pro license may be subject to the limits and terms shown at purchase.
+      </p>
+
+      <h2>8. Disclaimer of warranties</h2>
+      <p>
+        BVT and this website are provided "as is" and "as available," without warranties of
+        any kind, express or implied, including merchantability, fitness for a particular
+        purpose, non-infringement, and uninterrupted or error-free operation. Some
+        jurisdictions do not allow the exclusion of certain warranties, so parts of this
+        section may not apply to you.
+      </p>
+
+      <h2>9. Limitation of liability</h2>
+      <p>
+        To the maximum extent permitted by law, BVT and its operator are not liable for
+        indirect, incidental, special, consequential, or punitive damages, or for lost
+        profits, data, files, or goodwill, arising from or related to your use of BVT or
+        this website. This includes claims related to downloaded content, platform changes,
+        or third-party services.
+      </p>
+
+      <h2>10. Privacy</h2>
+      <p>
+        The <a href="/privacy/">Privacy Policy</a> explains what the extension reads, which
+        network requests it makes, and how local settings and Pro licensing work. It is
+        part of these terms.
+      </p>
+
+      <h2>11. Contact</h2>
+      <p>
+        For questions about these terms, email{' '}
+        <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>. This page is a
+        practical product notice, not legal advice.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

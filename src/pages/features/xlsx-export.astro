@@ -1,0 +1,229 @@
+---
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTA from '../../components/CTA.astro';
+import FAQ from '../../components/FAQ.astro';
+import Icon from '../../components/Icon.astro';
+import InstallButton from '../../components/InstallButton.astro';
+import ProductShot from '../../components/ProductShot.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { XLSX_EXPORT_FAQS } from '../../data/faqs';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+const title = 'Export TikTok Video Data to Excel — BVT';
+const description =
+  'Export selected public TikTok video metadata to an XLSX workbook with BVT. Includes video ID, description, dates, duration, playlist context, and engagement counts.';
+const jsonLd = [
+  breadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'Features', href: '/features/' },
+    { name: 'XLSX Export', href: '/features/xlsx-export/' },
+  ]),
+  faqSchema(XLSX_EXPORT_FAQS),
+];
+
+const fields = [
+  ['Video ID', 'The numeric TikTok video identifier.'],
+  ['Video Cover', 'Cover image URL exposed by the page.'],
+  ['Video Desc', 'The video description or caption.'],
+  ['Video Detail', 'A link to the public video detail page.'],
+  ['Video Url', 'The media URL used by the download workflow.'],
+  ['isTop', 'Whether the page marks the item as pinned, where available.'],
+  ['Create Date', 'The publish date exposed by the page.'],
+  ['PlayList ID', 'Playlist identifier when the video belongs to a playlist.'],
+  ['PlayList Name', 'Playlist name when available.'],
+  ['Duration', 'Video duration from the page data.'],
+  ['Play Count', 'Public play count where available.'],
+  ['Digg Count', 'Public like count where available.'],
+  ['Collect Count', 'Public save/collect count where available.'],
+  ['Comment Count', 'Public comment count where available.'],
+  ['Share Count', 'Public share count where available.'],
+] as const;
+
+const limits = [
+  'The export contains selected records from the loaded page sample. It is not a platform-wide dataset.',
+  'Fields are included only when the page exposes them. Missing values are left blank.',
+  'Counts are a snapshot, not a live feed or a historical trend.',
+  'The workbook does not include sales, revenue, ad spend, conversion, or audience demographics.',
+  'BVT does not merge records across pages, tabs, or browsing sessions.',
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/features/xlsx-export/"
+  jsonLd={jsonLd}
+>
+  <section class="border-b border-slate-200 bg-slate-50">
+    <div class="container-page py-10 sm:py-14">
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Features', href: '/features/' },
+          { name: 'XLSX Export', href: '/features/xlsx-export/' },
+        ]}
+      />
+      <div class="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
+            Metadata export
+          </p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            Export TikTok Video Data to Excel
+          </h1>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+            Take the selected videos from a creator, short drama, or list workflow and
+            export their public metadata to an XLSX workbook. Open it in Excel, Google
+            Sheets, or another spreadsheet tool.
+          </p>
+          <div class="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <InstallButton campaign="feature-xlsx-export" label="Add BVT to Chrome" />
+            <a
+              href="/guides/how-to-export-tiktok-video-data-to-excel/"
+              class="text-sm font-semibold text-brand-700 hover:underline"
+            >
+              Read the XLSX export guide
+            </a>
+          </div>
+        </div>
+        <ProductShot id="creator-panel" priority />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-5 md:grid-cols-3">
+        {[
+          ['Selection is the source', 'The workbook uses the selected videos from the current workflow. It does not silently include other records.'],
+          ['Local file output', 'BVT generates the workbook in your browser and saves it locally. There is no upload step or spreadsheet integration.'],
+          ['Missing values stay missing', 'If a field is not exposed by the page, it is left blank rather than estimated or filled with a default.'],
+        ].map(([heading, text]) => (
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h2 class="text-base font-bold text-slate-950">{heading}</h2>
+            <p class="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Field reference"
+        title="Fifteen columns, one row per selected video."
+        description="These are the fields BVT writes when the page exposes a value for the record."
+      />
+      <div class="mt-8 overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full border-collapse text-left text-sm">
+          <caption class="sr-only">BVT XLSX export fields</caption>
+          <thead class="bg-slate-50">
+            <tr>
+              <th scope="col" class="px-3 py-3 font-bold text-slate-900 sm:px-5 sm:py-3.5">Column</th>
+              <th scope="col" class="px-3 py-3 font-bold text-slate-900 sm:px-5 sm:py-3.5">What it contains</th>
+            </tr>
+          </thead>
+          <tbody>
+            {fields.map(([field, meaning]) => (
+              <tr class="border-t border-slate-100">
+                <th scope="row" class="px-3 py-3 font-semibold text-slate-800 sm:px-5 sm:py-3.5">{field}</th>
+                <td class="px-3 py-3 text-slate-600 sm:px-5 sm:py-3.5">{meaning}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-50 py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <SectionHeading
+          eyebrow="Workflow"
+          title="Select, export, and document the sample."
+          description="A spreadsheet is easier to trust when the source page and filter context travel with it."
+        />
+        <ol class="space-y-4">
+          {[
+            ['Build the selection', 'Load the creator, drama, or list page and select the videos you need. Confirm the count.'],
+            ['Start the export', 'Use the BVT export action. The extension writes the selected records to an XLSX workbook.'],
+            ['Open the file', 'Open the workbook in Excel, Google Sheets, or another spreadsheet application.'],
+            ['Check the rows', 'Confirm the row count and spot-check a few known videos before sharing or cleaning the file.'],
+            ['Keep the context', 'Record the source URL, capture date, filters, and known missing fields next to the file.'],
+          ].map(([step, text], index) => (
+            <li class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+                {index + 1}
+              </span>
+              <div>
+                <h3 class="text-sm font-bold text-slate-950">{step}</h3>
+                <p class="mt-1.5 text-sm leading-6 text-slate-600">{text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <div>
+          <SectionHeading
+            eyebrow="Data hygiene"
+            title="Keep the sample explainable."
+            description="A workbook without its source context looks more precise than it is."
+          />
+          <ul class="mt-6 space-y-3 text-sm leading-6 text-slate-600">
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Store the source page URL and capture date with the file.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Note the filters and selection method used.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Do not treat a blank cell as zero; it usually means the field was missing.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Keep the raw export separate from a cleaned version.</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <h2 class="text-base font-bold text-slate-950">What the workbook is not</h2>
+          <p class="mt-3 text-sm leading-7 text-slate-600">
+            It is not a sales report, a complete account history, or a live dashboard. It
+            is a local snapshot of the public fields attached to the videos you selected.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-50 py-14 sm:py-20">
+    <div class="container-page">
+      <SectionHeading eyebrow="Limits" title="What the export cannot tell you." />
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        {limits.map((limit) => (
+          <div class="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm leading-6 text-slate-600">
+            <Icon name="alert" class="mt-0.5 h-4 w-4 shrink-0 text-signal-500" />
+            <p>{limit}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <SectionHeading eyebrow="FAQ" title="XLSX export questions." align="center" />
+      <div class="mx-auto mt-8 max-w-4xl">
+        <FAQ items={XLSX_EXPORT_FAQS} />
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    campaign="feature-xlsx-final"
+    title="Keep the metadata with the videos."
+    description="Install BVT, select the records you need, and export a local XLSX workbook. Pro unlocks the full batch workflow."
+    secondaryHref="/guides/how-to-export-tiktok-video-data-to-excel/"
+    secondaryLabel="Read the XLSX export guide"
+  />
+</BaseLayout>

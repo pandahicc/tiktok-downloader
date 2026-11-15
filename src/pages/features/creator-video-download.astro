@@ -1,0 +1,234 @@
+---
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CTA from '../../components/CTA.astro';
+import FAQ from '../../components/FAQ.astro';
+import Icon from '../../components/Icon.astro';
+import InstallButton from '../../components/InstallButton.astro';
+import ProductShot from '../../components/ProductShot.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CREATOR_VIDEO_FAQS } from '../../data/faqs';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+const title = "Download a Creator’s Videos in Bulk — BVT";
+const description =
+  "Load a public TikTok creator’s posts, reposts, playlists, or liked videos, filter the list, and batch download or export the selection with BVT.";
+const jsonLd = [
+  breadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'Features', href: '/features/' },
+    { name: 'Creator Video Download', href: '/features/creator-video-download/' },
+  ]),
+  faqSchema(CREATOR_VIDEO_FAQS),
+];
+
+const channels = [
+  ['Posts', 'The creator’s public videos as they appear on the profile.'],
+  ['Reposts', 'Public reposts where TikTok exposes the section.'],
+  ['Playlists', 'The creator’s public playlists and their videos.'],
+  ['Liked videos', 'Public liked videos where the profile makes them available.'],
+] as const;
+
+const limits = [
+  'BVT loads what the profile makes available. Private, removed, region-blocked, or login-only videos cannot be loaded.',
+  'The run is not a guaranteed complete archive. It stops when TikTok stops returning items or when you stop it.',
+  'Filters apply to the loaded list. A filtered result is not the same as the creator’s full history.',
+  'BVT does not merge partial runs across pages, tabs, or sessions.',
+  'Basic has limited batch processing; Pro unlocks the full batch workflow.',
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/features/creator-video-download/"
+  jsonLd={jsonLd}
+>
+  <section class="border-b border-slate-200 bg-slate-50">
+    <div class="container-page py-10 sm:py-14">
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Features', href: '/features/' },
+          { name: 'Creator Video Download', href: '/features/creator-video-download/' },
+        ]}
+      />
+      <div class="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
+            Creator profiles
+          </p>
+          <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+            Download a Creator’s Videos in Bulk
+          </h1>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+            Open a public creator profile, load posts, reposts, playlists, or liked
+            videos, filter the list, and save the selected videos as a ZIP or a folder.
+          </p>
+          <div class="mt-7 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <InstallButton campaign="feature-creator-videos" label="Add BVT to Chrome" />
+            <a
+              href="/guides/how-to-download-a-tiktok-creators-videos/"
+              class="text-sm font-semibold text-brand-700 hover:underline"
+            >
+              Read the creator guide
+            </a>
+          </div>
+        </div>
+        <ProductShot id="creator-profile" priority />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Four channels"
+        title="Choose the part of the profile you need."
+        description="The creator tools use the public sections TikTok exposes for the profile you opened."
+      />
+      <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {channels.map(([name, description]) => (
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white text-brand-700 shadow-sm">
+              <Icon name="user" class="h-5 w-5" />
+            </span>
+            <h2 class="mt-4 text-base font-bold text-slate-950">{name}</h2>
+            <p class="mt-2 text-sm leading-6 text-slate-600">{description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <SectionHeading
+          eyebrow="Filters"
+          title="Narrow the loaded list before you download."
+          description="Use the fields the page exposes. A filter is a view of the loaded records, not a new data source."
+        />
+        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <ul class="space-y-3 text-sm leading-6 text-slate-600">
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Duration and publish-time ranges.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Keyword include and exclude rules.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Minimum play and like counts where available.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />A selected count that follows the current filter scope.</li>
+          </ul>
+          <p class="mt-5 rounded-xl bg-white p-4 text-xs leading-5 text-slate-500">
+            Record the page URL, capture date, and filters next to the files. A creator
+            sample without that context is hard to reproduce later.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-50 py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <SectionHeading
+          eyebrow="Workflow"
+          title="Load, filter, select, and save."
+          description="Stop and continue where the extension offers it. A stopped run does not merge with a later one."
+        />
+        <ol class="space-y-4">
+          {[
+            ['Open the creator’s public profile', 'Confirm you are on the public profile URL and that the page has rendered.'],
+            ['Open the BVT creator panel', 'Choose posts, reposts, playlists, or liked videos, then start the acquisition.'],
+            ['Filter the loaded list', 'Apply duration, time, keyword, or count filters that match the sample you need.'],
+            ['Select the videos', 'Use the selection controls and confirm the count before acting.'],
+            ['Download or export', 'Save the selection as a ZIP, write it to a folder, or export the metadata to XLSX.'],
+          ].map(([step, text], index) => (
+            <li class="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+                {index + 1}
+              </span>
+              <div>
+                <h3 class="text-sm font-bold text-slate-950">{step}</h3>
+                <p class="mt-1.5 text-sm leading-6 text-slate-600">{text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div>
+          <SectionHeading
+            eyebrow="Metadata"
+            title="Take the selected records into a spreadsheet."
+            description="The XLSX export uses the same selection as the download actions and includes the public fields the page exposes."
+          />
+          <ul class="mt-6 space-y-3 text-sm leading-6 text-slate-600">
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Video ID, cover, description, detail URL, and media URL.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Create date, duration, playlist ID, playlist name, and isTop.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Play, digg, collect, comment, and share counts where available.</li>
+            <li class="flex gap-3"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />Missing values are left blank rather than invented.</li>
+          </ul>
+          <a
+            href="/features/xlsx-export/"
+            class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-800"
+          >
+            See the XLSX export fields
+            <Icon name="arrow" class="h-4 w-4" />
+          </a>
+        </div>
+        <ProductShot id="creator-panel" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <SectionHeading eyebrow="Limits" title="What creator acquisition cannot guarantee." />
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        {limits.map((limit) => (
+          <div class="flex gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-600">
+            <Icon name="alert" class="mt-0.5 h-4 w-4 shrink-0 text-signal-500" />
+            <p>{limit}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <div class="rounded-3xl border border-amber-200 bg-amber-50 p-6 sm:p-8">
+        <div class="flex gap-4">
+          <Icon name="alert" class="mt-0.5 h-6 w-6 shrink-0 text-amber-600" />
+          <div>
+            <h2 class="text-lg font-bold text-slate-950">Downloading a profile is not a license to reuse it.</h2>
+            <p class="mt-2 max-w-3xl text-sm leading-7 text-slate-700">
+              Public availability is not permission. Confirm that you have the rights to
+              use each video, especially for advertising, client work, or republication.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-slate-50 py-14 sm:py-20">
+    <div class="container-page">
+      <SectionHeading eyebrow="FAQ" title="Creator workflow questions." align="center" />
+      <div class="mx-auto mt-8 max-w-4xl">
+        <FAQ items={CREATOR_VIDEO_FAQS} />
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    campaign="feature-creator-final"
+    title="Work through a creator profile without opening each video."
+    description="Install BVT, open a public profile, and build the selection you need. Pro unlocks the full batch workflow."
+    secondaryHref="/guides/how-to-download-a-tiktok-creators-videos/"
+    secondaryLabel="Read the creator guide"
+  />
+</BaseLayout>

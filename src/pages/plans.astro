@@ -1,0 +1,203 @@
+---
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import CTA from '../components/CTA.astro';
+import FAQ from '../components/FAQ.astro';
+import Icon from '../components/Icon.astro';
+import InstallButton from '../components/InstallButton.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PLANS_FAQS } from '../data/faqs';
+import { COMPARISON } from '../data/site';
+import { breadcrumbSchema, faqSchema } from '../lib/schema';
+
+const title = 'Free and Pro — BVT';
+const description =
+  'Compare the Basic and Pro BVT plans. Basic covers single downloads and limited batch processing; Pro unlocks the full batch workflow through an in-app purchase.';
+const jsonLd = [
+  breadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'Plans', href: '/plans/' },
+  ]),
+  faqSchema(PLANS_FAQS),
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/plans/" jsonLd={jsonLd}>
+  <section class="border-b border-slate-200 bg-slate-50">
+    <div class="container-page py-10 sm:py-14">
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Plans', href: '/plans/' },
+        ]}
+      />
+      <div class="mt-8 max-w-3xl">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
+          Plans
+        </p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+          Free and Pro
+        </h1>
+        <p class="mt-5 text-lg leading-8 text-slate-600">
+          Start with single downloads and limited batch processing. Pro unlocks the full
+          batch workflow for list pages, creator profiles, short dramas, folder or ZIP
+          output, and XLSX export.
+        </p>
+        <p class="mt-3 text-sm leading-6 text-slate-500">
+          This site does not display a price. The extension shows the current plan and
+          total before you confirm an in-app purchase.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm sm:p-9">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
+                Basic
+              </p>
+              <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-950">
+                Start with single videos
+              </h2>
+            </div>
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+              Free
+            </span>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-slate-600">
+            The core download experience, with single videos and limited batch
+            processing. Good for occasional downloads and trying the workflow.
+          </p>
+          <ul class="mt-6 space-y-3 text-sm leading-6 text-slate-600">
+            {[
+              'Single video downloads',
+              'Watermark-free HD where the source supports it',
+              'Limited batch processing',
+              'Short drama episode picker',
+              'Filename templates',
+              '23 interface languages',
+            ].map((item) => (
+              <li class="flex gap-3">
+                <Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-600" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-7">
+            <InstallButton campaign="plans-basic" label="Install BVT" variant="secondary" />
+          </div>
+        </div>
+
+        <div class="relative rounded-3xl border border-brand-300 bg-brand-50/50 p-7 shadow-sm sm:p-9">
+          <span class="absolute right-6 top-6 rounded-full bg-brand-700 px-3 py-1 text-xs font-bold text-white">
+            Full workflow
+          </span>
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.14em] text-brand-700">
+                Pro
+              </p>
+              <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-950">
+                Unlock the batch tools
+              </h2>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-slate-700">
+            Pro is an in-app purchase that unlocks the full workflow for larger
+            selections. It does not change what TikTok makes available or grant rights to
+            use the videos.
+          </p>
+          <ul class="mt-6 space-y-3 text-sm leading-6 text-slate-700">
+            {[
+              'Full batch workflow from Search, Explore, and profiles',
+              'Creator posts, reposts, playlists, and liked videos',
+              'Short drama episode downloads',
+              'Save to a folder or download a ZIP',
+              'XLSX metadata export',
+              'Same 23-language interface',
+            ].map((item) => (
+              <li class="flex gap-3">
+                <Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-brand-700" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-7">
+            <InstallButton campaign="plans-pro" label="Install BVT to see plans" />
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-6 max-w-3xl text-xs leading-5 text-slate-500">
+        Plan limits reset according to the schedule shown in the extension. Pro removes
+        the Basic batch limit for supported workflows, but page availability and TikTok’s
+        own limits still apply.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-slate-50 py-14 sm:py-20">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Comparison"
+        title="What changes between Basic and Pro."
+        description="Capabilities, not prices. The current plan details are shown in the extension before checkout."
+      />
+      <div class="mt-8">
+        <ComparisonTable
+          rows={COMPARISON}
+          note="Included means the capability is part of that plan. Limited and Full workflow refer to the batch processing scope. Availability always depends on the public page."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-14 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <SectionHeading
+          eyebrow="Activation"
+          title="Pro is managed inside the extension."
+          description="BVT does not take card details on this website and does not have a web checkout."
+        />
+        <div class="space-y-4 text-sm leading-7 text-slate-600">
+          <p>
+            Open the extension’s subscription flow and complete the in-app purchase. When
+            you return, the extension can refresh your license status. If the status does
+            not update, use the refresh or restore control in the extension.
+          </p>
+          <p>
+            Do not send passwords, subscription tokens, or page data to support. A purchase
+            reference is enough for a licensing question.
+          </p>
+          <p class="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-900">
+            Pro raises the batch limit; it does not grant permission to republish or
+            commercialize someone else’s video. Always confirm the rights you need.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-slate-50 py-14 sm:py-20">
+    <div class="container-page">
+      <SectionHeading eyebrow="FAQ" title="Plan questions." align="center" />
+      <div class="mx-auto mt-8 max-w-4xl">
+        <FAQ items={PLANS_FAQS} />
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    campaign="plans-final"
+    title="Try the free workflow first."
+    description="Install BVT, start with a single video, and unlock Pro in the extension when you need the full batch workflow."
+    secondaryHref="/support/"
+    secondaryLabel="Get help with activation"
+  />
+</BaseLayout>

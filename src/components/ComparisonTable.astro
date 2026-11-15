@@ -1,0 +1,90 @@
+---
+import { COMPARISON } from '../data/site';
+import Icon from './Icon.astro';
+
+interface Row {
+  label: string;
+  free: string;
+  pro: string;
+}
+
+interface Props {
+  rows?: ReadonlyArray<Row>;
+  caption?: string;
+  note?: string;
+}
+
+const {
+  rows = COMPARISON,
+  caption = 'Basic and Pro feature comparison',
+  note,
+} = Astro.props;
+
+function isIncluded(value: string): boolean {
+  return value === 'Included' || value === '23';
+}
+---
+
+<div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+  <table class="w-full border-collapse text-left text-sm">
+    <caption class="sr-only">{caption}</caption>
+    <thead>
+      <tr class="border-b border-slate-200 bg-slate-50">
+        <th scope="col" class="px-3 py-3 font-bold text-slate-900 sm:px-5 sm:py-4">
+          Capability
+        </th>
+        <th
+          scope="col"
+          class="whitespace-nowrap px-3 py-3 text-center font-bold text-slate-900 sm:px-5 sm:py-4"
+        >
+          Basic
+        </th>
+        <th
+          scope="col"
+          class="whitespace-nowrap px-3 py-3 text-center font-bold text-slate-900 sm:px-5 sm:py-4"
+        >
+          Pro
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr class="border-b border-slate-100 last:border-0">
+            <th
+              scope="row"
+              class="px-3 py-3 font-medium text-slate-700 sm:px-5 sm:py-3.5"
+            >
+              {row.label}
+            </th>
+            <td class="px-3 py-3 text-center sm:px-5 sm:py-3.5">
+              {isIncluded(row.free) ? (
+                <span class="inline-flex items-center justify-center gap-1.5 font-semibold text-brand-700">
+                  <Icon name="check" class="h-4 w-4" />
+                  <span>{row.free === '23' ? '23' : 'Included'}</span>
+                </span>
+              ) : (
+                <span class="text-slate-600">{row.free}</span>
+              )}
+            </td>
+            <td class="px-3 py-3 text-center sm:px-5 sm:py-3.5">
+              {isIncluded(row.pro) ? (
+                <span class="inline-flex items-center justify-center gap-1.5 font-semibold text-brand-700">
+                  <Icon name="check" class="h-4 w-4" />
+                  <span>{row.pro === '23' ? '23' : 'Included'}</span>
+                </span>
+              ) : (
+                <span class="text-slate-600">{row.pro}</span>
+              )}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+{
+  note && (
+    <p class="mt-4 text-xs leading-5 text-slate-500">{note}</p>
+  )
+}

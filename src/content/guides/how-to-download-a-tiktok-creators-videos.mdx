@@ -1,0 +1,133 @@
+---
+title: How to Download a TikTok Creator’s Videos
+description: "Load a public TikTok creator’s posts, reposts, playlists, or liked videos with BVT, filter the list, and download or export the selection."
+pubDate: 2026-11-15
+updatedDate: 2026-11-15
+readingTime: 9
+category: Creator workflows
+featureHref: /features/creator-video-download/
+featureLabel: Creator Video Download
+related:
+  - how-to-bulk-download-tiktok-videos
+  - how-to-download-tiktok-videos
+  - how-to-export-tiktok-video-data-to-excel
+takeaways:
+  - Start from a public profile and choose the exact section you need.
+  - The run loads available pages; it is not a guaranteed complete archive.
+  - Filters apply to the loaded list, not to TikTok’s full history.
+  - Keep the page URL, date, and filters with the downloaded files.
+draft: false
+---
+
+import Callout from '../../components/Callout.astro';
+
+A creator profile looks like a complete list. It usually is not. The public page may show recent posts first, hide older items behind loading, omit reposts in some views, or fail to expose a playable source for a specific video. The profile’s headline count is not the same as the set of files you can actually download.
+
+BVT’s creator tools are designed around that gap: load the public sections you can reach, filter the result, and be explicit about what the selection contains.
+
+<Callout tone="note" title="Quick answer">
+Open a public creator profile, open the BVT creator panel, choose posts, reposts, playlists, or liked videos, then start the acquisition. Filter the loaded list, select the videos you need, and save them as a ZIP or folder or export the metadata to XLSX.
+</Callout>
+
+## Step 1: Open the right profile
+
+Use the public profile URL. Confirm the page has rendered and that you are not on a private or login-only view. BVT does not bypass login, CAPTCHA, region restrictions, DRM, or rate limits.
+
+If the profile is unavailable to logged-out visitors, the creator tools cannot make it available. That is a platform boundary, not a setting to change.
+
+## Step 2: Choose a section
+
+The creator panel exposes the sections the profile makes available:
+
+- **Posts** — the creator’s public videos.
+- **Reposts** — public reposts where the page exposes them.
+- **Playlists** — public playlists and their videos.
+- **Liked videos** — public liked videos where the profile exposes them.
+
+Choose the section that matches the question. A posts sample and a liked-videos sample are different populations, even when they contain some of the same videos. Do not combine them into one unlabeled folder.
+
+## Step 3: Start, continue, and stop
+
+Start the acquisition and let it load. The panel reports progress and offers Continue where a run can resume. Stop when you have the sample you need or when the page stops returning new items.
+
+A stopped run is not a durable queue. If you start again later, the new run may not merge with the previous selection. Record what you already downloaded before restarting.
+
+## Step 4: Filter the loaded list
+
+Filters help you turn a large loaded list into a reviewable sample. Depending on the fields the page exposes, BVT can filter by:
+
+- duration;
+- publish-time range;
+- keyword include or exclude;
+- minimum play or like counts.
+
+Filtering does not load more videos. It narrows the records already in the panel. A filtered list with 40 videos is not evidence that the creator has only 40 videos.
+
+<Callout tone="tip" title="Write down the filter scope">
+"Posts from the last 90 days with at least 10,000 plays" is a reproducible sample definition. "Recent popular videos" is not. Keep the definition with the folder.
+</Callout>
+
+## Step 5: Select and act
+
+Review the selected count before you download or export. The selection is the source of truth for both actions. A mismatch between what you reviewed and what you selected is the most common way a batch becomes hard to explain.
+
+BVT can save the selection as:
+
+- a ZIP archive;
+- individual MP4 files in a folder you choose;
+- an XLSX workbook of the selected public metadata.
+
+The workbook includes fields such as video ID, cover, description, detail URL, media URL, isTop, create date, playlist ID and name, duration, and public engagement counts. Missing values are left blank.
+
+## Why the count is lower than the profile shows
+
+A profile can include items that BVT cannot load or download:
+
+- private or removed videos;
+- region-blocked videos;
+- items with no playable source;
+- pages that TikTok stops returning during the run;
+- sections that are not exposed to logged-out visitors.
+
+BVT cannot bypass those limits. Treat the result as the available sample, not a complete archive. If you need a complete record for a business decision, use a source that is authorized to provide it.
+
+<Callout tone="warning" title="Do not call it a complete archive">
+A folder of 200 videos from a profile with 500 public posts is a 200-video sample. Describing it as the creator’s full catalog is inaccurate, even if the files are real.
+</Callout>
+
+## Rights and platform rules
+
+Downloading a public profile does not give you the right to republish the videos, use them in advertising, or include them in a commercial product. Confirm the permission you need from the creator or another rights holder. Do not use the files to harass, impersonate, or build a profile of an individual.
+
+## A practical creator workflow
+
+1. Open the public profile and record the URL.
+2. Choose the section: posts, reposts, playlists, or liked videos.
+3. Start the acquisition and stop when the sample is sufficient.
+4. Apply duration, time, keyword, or count filters.
+5. Review the selected count.
+6. Download as ZIP or folder, or export the metadata to XLSX.
+7. Record the date, filters, and known missing items.
+8. Check the files and confirm the rights before reuse.
+
+## Common questions
+
+### Can I download the entire profile automatically?
+
+No. BVT loads available pages until the page stops returning items or you stop the run. It does not guarantee a complete archive.
+
+### Can I combine posts and reposts?
+
+Download them as separate batches so the source section stays clear. BVT does not merge selections across runs.
+
+### Why are some videos missing from the export?
+
+The export contains the selected videos and the fields the page exposes. A missing video may be unavailable, or it may not have been in the loaded sample.
+
+### Is the engagement data live?
+
+No. Counts are a snapshot of the page data at the time of the run, not a real-time feed or a historical trend.
+
+## Where to go next
+
+For list-page batches, read [How to Bulk Download TikTok Videos](/guides/how-to-bulk-download-tiktok-videos/). For the spreadsheet side, read [How to Export TikTok Video Data to Excel](/guides/how-to-export-tiktok-video-data-to-excel/). The [Creator Video Download feature page](/features/creator-video-download/) lists the available sections and filters.

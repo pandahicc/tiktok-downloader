@@ -1,0 +1,428 @@
+---
+import ArticleCard from '../components/ArticleCard.astro';
+import BrowserFrame from '../components/BrowserFrame.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import CTA from '../components/CTA.astro';
+import FAQ from '../components/FAQ.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import Icon from '../components/Icon.astro';
+import InstallButton from '../components/InstallButton.astro';
+import ProductShot from '../components/ProductShot.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedGuides } from '../lib/content';
+import { HOME_FAQS } from '../data/faqs';
+import { COMPARISON, FEATURES, SITE, SUPPORTED_PAGES, USE_CASES } from '../data/site';
+import {
+  faqSchema,
+  organizationSchema,
+  softwareApplicationSchema,
+  websiteSchema,
+} from '../lib/schema';
+
+const guides = (await getPublishedGuides()).slice(0, 3);
+const jsonLd = [
+  organizationSchema(),
+  websiteSchema(),
+  softwareApplicationSchema(),
+  faqSchema(HOME_FAQS),
+];
+
+const steps = [
+  {
+    title: 'Open a public TikTok page',
+    description:
+      'A video page, creator profile, Search result, Explore page, hashtag, short drama, or the Home feed. No BVT account is required.',
+  },
+  {
+    title: 'Download one video or build a selection',
+    description:
+      'Use the download control on a video, or add multiple videos from a supported list or creator profile.',
+  },
+  {
+    title: 'Choose ZIP, browser download, or a folder',
+    description:
+      'Single videos use the browser download flow. Batch selections can become a ZIP or individual files in a folder you choose.',
+  },
+  {
+    title: 'Check progress and retry failures',
+    description:
+      'A failed item is reported without stopping the rest of the queue. Refresh the page and retry if a media URL expired.',
+  },
+];
+
+const gallery = [
+  {
+    id: 'single-download',
+    caption: 'Single video download control on a public TikTok video.',
+    className: '',
+  },
+  {
+    id: 'explore-list',
+    caption: 'Download controls on Explore cards for individual videos.',
+    className: '',
+  },
+  {
+    id: 'search-list',
+    caption: 'Add and download controls on a Search results page.',
+    className: '',
+  },
+  {
+    id: 'creator-profile',
+    caption: 'The Download entry point on a public creator profile.',
+    className: '',
+  },
+  {
+    id: 'creator-panel',
+    caption: 'Creator filters with Export and Download actions.',
+    className: 'sm:col-span-2',
+  },
+] as const;
+---
+
+<BaseLayout
+  title={SITE.title}
+  description={SITE.description}
+  canonicalPath="/"
+  jsonLd={jsonLd}
+>
+  <section class="relative overflow-hidden border-b border-slate-200 bg-slate-50">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-grid opacity-60">
+    </div>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-40 -top-32 h-96 w-96 rounded-full bg-brand-200/50 blur-3xl"
+    >
+    </div>
+    <div class="container-page relative py-16 sm:py-20 lg:py-24">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+        <div>
+          <p
+            class="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-brand-700 shadow-sm"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-signal-500"></span>
+            BVT for Chrome
+          </p>
+          <h1
+            class="max-w-2xl text-4xl font-bold leading-[1.08] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl"
+          >
+            Download TikTok videos without the watermark.
+          </h1>
+          <p class="mt-6 max-w-xl text-lg leading-8 text-slate-600">
+            Save single videos in HD where TikTok provides an HD source, or batch
+            download from Search, Explore, and creator profiles. Keep the files as MP4 or
+            ZIP, and export selected metadata to XLSX.
+          </p>
+          <p class="mt-3 max-w-xl text-sm leading-6 text-slate-500">
+            Watermark-free and HD quality depend on the source TikTok provides for each
+            video. BVT does not re-encode or edit media.
+          </p>
+          <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <InstallButton
+              campaign="homepage-hero"
+              size="lg"
+              label="Add BVT to Chrome — Free"
+              showNote
+            />
+            <a
+              href="#how-it-works"
+              class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-brand-700"
+            >
+              See how it works
+              <Icon name="arrow" class="h-4 w-4" />
+            </a>
+          </div>
+          <ul class="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-slate-500">
+            <li class="inline-flex items-center gap-1.5">
+              <Icon name="check" class="h-3.5 w-3.5 text-brand-600" />
+              No BVT account required
+            </li>
+            <li class="inline-flex items-center gap-1.5">
+              <Icon name="check" class="h-3.5 w-3.5 text-brand-600" />
+              23 interface languages
+            </li>
+            <li class="inline-flex items-center gap-1.5">
+              <Icon name="check" class="h-3.5 w-3.5 text-brand-600" />
+              Local browser downloads
+            </li>
+          </ul>
+        </div>
+
+        <div class="relative">
+          <div
+            aria-hidden="true"
+            class="absolute -inset-3 rounded-3xl bg-gradient-to-br from-brand-200/80 via-white to-signal-500/10 blur-xl"
+          >
+          </div>
+          <BrowserFrame url="tiktok.com" class="relative">
+            <ProductShot id="single-download" priority showCaption={false} />
+          </BrowserFrame>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-slate-200 bg-white py-8">
+    <div class="container-page">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+          Works where you browse
+        </p>
+        <ul class="flex flex-wrap gap-2">
+          {SUPPORTED_PAGES.map((page) => (
+            <li class="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-700">
+              {page}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-slate-200 bg-white py-16 sm:py-20">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Core features"
+        title="One extension for the download you actually need."
+        description="A single video, a page of Search results, a creator’s recent posts, or a short drama. BVT keeps the workflow on the page you already opened."
+      />
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+        {FEATURES.map((feature, index) => (
+          <div class:list={['h-full', index < 3 ? 'lg:col-span-2' : 'lg:col-span-3']}>
+            <FeatureCard feature={feature} />
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 max-w-3xl text-sm leading-6 text-slate-500">
+        Every feature depends on what the public page exposes. BVT does not bypass login,
+        CAPTCHA, region blocks, DRM, or other access controls.{' '}
+        <a href="/features/" class="font-semibold text-brand-700 hover:underline">
+          See all features.
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-slate-50 py-16 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <SectionHeading
+          eyebrow="Why BVT"
+          title="Built for quick downloads, not a separate dashboard."
+          description="No login, no upload step, and no background crawler. The extension works with the TikTok page you have open and writes files to your browser or a folder you choose."
+        />
+        <div class="grid gap-4 sm:grid-cols-2">
+          {[
+            ['No login required', 'Public pages only; TikTok may still show a login wall for some content.'],
+            ['Watermark-free where available', 'BVT saves the clean source when TikTok exposes one.'],
+            ['ZIP or folder output', 'Pick the workflow that fits the batch and your file manager.'],
+            ['23 interface languages', 'The extension follows the browser UI language.'],
+          ].map(([heading, text]) => (
+            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h3 class="text-sm font-bold text-slate-950">{heading}</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-16 sm:py-20" id="how-it-works">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="How it works"
+        title="Four steps, all on the page you opened."
+        description="No separate upload, no account dashboard, and no hidden library."
+      />
+      <ol class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          steps.map((step, index) => (
+            <li class="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+              <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+                {index + 1}
+              </span>
+              <h3 class="mt-4 text-base font-bold text-slate-950">{step.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">{step.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 sm:py-20">
+    <div class="container-page">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <SectionHeading
+          eyebrow="Product preview"
+          title="See the download, batch, and export surfaces."
+          description="Screenshots from the current BVT Chrome Web Store listing. The extension UI follows your browser language."
+        />
+        <a
+          href="/features/"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-800"
+        >
+          Explore the features
+          <Icon name="arrow" class="h-4 w-4" />
+        </a>
+      </div>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2">
+        {
+          gallery.map((shot) => (
+            <ProductShot
+              id={shot.id}
+              caption={shot.caption}
+              className={shot.className}
+              priority
+            />
+          ))
+        }
+      </div>
+      <p class="mt-4 text-xs leading-5 text-slate-500">
+        Screenshots are product captures from the Chrome Web Store listing. They are not
+        a promise that every video has an HD or watermark-free source.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-slate-50 py-16 sm:py-20">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Use cases"
+        title="For people who work with public TikTok content."
+        description="Save the videos you need for review, reference, or a team folder — and keep the source page with them."
+      />
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          USE_CASES.map((useCase) => (
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+                <Icon name={useCase.icon} class="h-5 w-5" />
+              </span>
+              <h3 class="mt-4 text-base font-bold text-slate-950">{useCase.title}</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">{useCase.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 sm:py-20">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Basic and Pro"
+        title="Start with single downloads. Unlock the full batch workflow when you need it."
+        description="BVT is free to install. Pro is an in-app purchase; this site does not display billing details because plans can change."
+      />
+      <div class="mt-10">
+        <ComparisonTable
+          rows={COMPARISON}
+          note="Limits and current plan details are shown inside the extension. Page availability and TikTok’s own limits still apply on Pro."
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-white py-16 sm:py-20">
+    <div class="container-page">
+      <div class="rounded-3xl border border-brand-200 bg-brand-50/60 p-6 sm:p-10">
+        <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">
+              Local-first by design
+            </p>
+            <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-950">
+              Page data stays in your browser.
+            </h2>
+            <p class="mt-4 text-base leading-7 text-slate-600">
+              BVT processes the public page data it can read in your browser. It does not
+              upload page data to BVT servers. Network requests are limited to the media
+              you choose to download, the TikTok page data needed for the workflow, and
+              Pro license validation.
+            </p>
+            <a
+              href="/privacy/"
+              class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-800"
+            >
+              Read the Privacy Policy
+              <Icon name="arrow" class="h-4 w-4" />
+            </a>
+          </div>
+          <ul class="grid gap-4 sm:grid-cols-3">
+            <li class="rounded-2xl bg-white p-5 shadow-sm">
+              <Icon name="shield" class="h-5 w-5 text-brand-700" />
+              <p class="mt-3 text-sm font-bold text-slate-900">Local page processing</p>
+              <p class="mt-1.5 text-xs leading-5 text-slate-600">
+                Page data is not uploaded to BVT.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white p-5 shadow-sm">
+              <Icon name="download" class="h-5 w-5 text-brand-700" />
+              <p class="mt-3 text-sm font-bold text-slate-900">User-initiated downloads</p>
+              <p class="mt-1.5 text-xs leading-5 text-slate-600">
+                Files are requested only when you start a download.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white p-5 shadow-sm">
+              <Icon name="info" class="h-5 w-5 text-brand-700" />
+              <p class="mt-3 text-sm font-bold text-slate-900">No extension telemetry</p>
+              <p class="mt-1.5 text-xs leading-5 text-slate-600">
+                The extension contains no analytics or telemetry.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    guides.length > 0 && (
+      <section class="border-y border-slate-200 bg-slate-50 py-16 sm:py-20">
+        <div class="container-page">
+          <div class="flex flex-wrap items-end justify-between gap-4">
+            <SectionHeading
+              eyebrow="Guides"
+              title="Practical notes for downloading public videos."
+              description="Start with the workflow you need, then check the limits before you use the files."
+            />
+            <a
+              href="/guides/"
+              class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-800"
+            >
+              All guides
+              <Icon name="arrow" class="h-4 w-4" />
+            </a>
+          </div>
+          <div class="mt-8 grid gap-5 md:grid-cols-3">
+            {guides.map((guide) => <ArticleCard entry={guide} />)}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="bg-white py-16 sm:py-20">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="FAQ"
+        title="Questions, answered."
+        description="The short version of what BVT does, what it needs, and what it deliberately does not claim."
+        align="center"
+      />
+      <div class="mx-auto mt-10 max-w-4xl">
+        <FAQ items={HOME_FAQS} />
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    campaign="homepage-final"
+    title="Download the video. Keep the context."
+    description="Install BVT, open a supported public TikTok page, and save a single video or a selection. Only download content you have the rights to use."
+    secondaryHref="/guides/"
+    secondaryLabel="Read the guides first"
+  />
+</BaseLayout>

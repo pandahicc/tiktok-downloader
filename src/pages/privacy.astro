@@ -1,0 +1,260 @@
+---
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Icon from '../components/Icon.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../lib/schema';
+import { SITE } from '../data/site';
+
+const title = 'Privacy Policy — BVT';
+const description =
+  'How BVT handles public page data, extension storage, TikTok requests, Pro license validation, and this static website.';
+const gaEnabled = Boolean(SITE.gaMeasurementId);
+const lastUpdated = 'November 15, 2026';
+const jsonLd = [
+  breadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'Privacy', href: '/privacy/' },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/privacy/" jsonLd={jsonLd}>
+  <section class="border-b border-slate-200 bg-slate-50">
+    <div class="container-page py-10 sm:py-14">
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'Privacy', href: '/privacy/' },
+        ]}
+      />
+      <div class="mt-8 max-w-3xl">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
+          Legal &amp; privacy
+        </p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+          Privacy Policy
+        </h1>
+        <p class="mt-5 text-lg leading-8 text-slate-600">
+          This policy describes the BVT Chrome extension and this website. It is written
+          to match the current build, including what the extension does{' '}
+          <strong>not</strong> do.
+        </p>
+        <p class="mt-4 text-sm text-slate-500">Last updated: {lastUpdated}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container-page py-12 sm:py-16">
+    <div class="prose max-w-3xl">
+      <div class="not-prose mb-10 rounded-2xl border border-brand-200 bg-brand-50/70 p-5 text-sm leading-6 text-brand-950">
+        <div class="flex gap-3">
+          <Icon name="shield" class="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
+          <p>
+            <strong>Short version:</strong> BVT processes public page data in your browser.
+            It does not upload page data to BVT servers. Downloads request media from
+            TikTok’s domains when you start them. Pro validation contacts the license
+            server at <code>pandahi.cc</code> with an account identifier and token, not page
+            data. The extension contains no analytics or telemetry.
+          </p>
+        </div>
+      </div>
+
+      <h2>1. Scope</h2>
+      <p>
+        This policy covers the BVT browser extension and the public website at{' '}
+        <a href={SITE.url}>{SITE.url}</a>. It does not cover TikTok, the Chrome Web Store,
+        the payment processor, or any other third-party service you choose to use. Those
+        services have their own policies.
+      </p>
+
+      <h2>2. What the extension reads</h2>
+      <p>
+        BVT is built for public TikTok pages you open. Depending on the page, it reads
+        information already present in the page: rendered video cards, read-only React
+        props exposed by the page, and embedded page JSON. The fields can include video
+        IDs, descriptions, covers, counts, author identifiers, playlist context, video
+        sources, and short drama episode data.
+      </p>
+      <p>
+        BVT does not bypass login, CAPTCHA, region restrictions, DRM, or rate limits. It
+        is intended for public pages. It does not collect private messages, passwords, or
+        content that the page does not make available.
+      </p>
+
+      <h2>3. Where page data is processed</h2>
+      <p>
+        Page data is processed locally in your browser. BVT does not upload page data to a
+        BVT server. It does not sell page data or use it for advertising. It does not run a
+        background crawler or build a hidden library of videos.
+      </p>
+      <p>
+        Settings, filename preferences, a small profile <code>secUid</code> cache, and an
+        encrypted Pro credential can be stored in <code>chrome.storage.local</code>. Page
+        content used by the panels is kept in the page context and is not sent to BVT.
+      </p>
+
+      <h2>4. Network requests</h2>
+      <p>
+        Network activity falls into four narrow categories. They are separate from page
+        data collection.
+      </p>
+      <ul>
+        <li>
+          <strong>Page data for the page you opened.</strong> When you start a creator or
+          short drama workflow, BVT requests TikTok’s own public endpoints for that page to
+          load additional posts or episodes. The request is tied to the page you are on
+          and the action you started.
+        </li>
+        <li>
+          <strong>Downloads.</strong> When you click a download control, BVT requests the
+          media URL from TikTok’s media domains and writes the file locally. The request is
+          user-initiated.
+        </li>
+        <li>
+          <strong>Pro license validation.</strong> When you open the subscription flow,
+          restore a license, refresh status, or trigger a paid feature while a check is
+          required, the extension contacts <code>pandahi.cc</code>. The request can include
+          an account identifier, token, channel, and operation type. It does{' '}
+          <strong>not</strong> include page data or downloaded media.
+        </li>
+        <li>
+          <strong>Support links.</strong> Email support opens your mail client. BVT does not
+          include a contact form and does not read your email.
+        </li>
+      </ul>
+
+      <h2>5. Permissions</h2>
+      <p>The current extension manifest requests:</p>
+      <ul>
+        <li>
+          <code>storage</code> — settings, filename preferences, download counts, the
+          profile <code>secUid</code> cache, and the Pro credential.
+        </li>
+        <li>
+          <code>tabs</code> — opening the subscription page and sending streamed download
+          chunks to the active tab.
+        </li>
+        <li>
+          <code>webRequest</code> — observing TikTok’s post-list response so the extension
+          can associate a public profile with its <code>secUid</code> for creator
+          workflows. The extension does not store media responses.
+        </li>
+        <li>
+          <code>declarativeNetRequest</code> — setting Referer, Origin, and CORS headers on
+          user-initiated TikTok media requests so the download can complete in the browser.
+        </li>
+        <li>
+          Host permissions for <code>*.tiktok.com</code> and <code>*.tiktokcdn.com</code> —
+          the public page script and user-initiated media requests.
+        </li>
+        <li>
+          Host permission for <code>pandahi.cc</code> — Pro activation, license restore, and
+          status refresh.
+        </li>
+      </ul>
+      <p>
+        BVT does not request <code>&lt;all_urls&gt;</code>, the Chrome <code>downloads</code>{' '}
+        permission, the camera, the microphone, or your location.
+      </p>
+
+      <h2>6. Local storage and retention</h2>
+      <ul>
+        <li>Settings and filename preferences stay in local extension storage until you clear them or uninstall BVT.</li>
+        <li>The profile <code>secUid</code> cache is a small recent mapping. Older entries are trimmed as new profiles are seen.</li>
+        <li>The Pro credential stays until you sign out, clear it, or uninstall the extension.</li>
+        <li>Downloaded files are written to your browser’s download location or a folder you choose. They remain under your control.</li>
+        <li>BVT does not keep a server-side copy of your downloads or page data.</li>
+      </ul>
+
+      <h2>7. This website</h2>
+      <p>
+        This website is a static site. It does not load a tag manager, advertising pixels,
+        embedded videos, third-party fonts, or a contact form. It does not set its own
+        cookies. The hosting provider may process standard request metadata such as IP
+        address, user agent, and timestamp for delivery, security, and abuse prevention
+        under its own policy.
+      </p>
+
+      {
+        gaEnabled ? (
+          <>
+            <h3>Google Analytics (enabled on this build)</h3>
+            <p>
+              This build uses Google Analytics 4 with measurement ID{' '}
+              <code>{SITE.gaMeasurementId}</code>. GA4 may collect page views, approximate
+              location derived from the request, device and browser information, and
+              interaction events, and may set <code>_ga</code> cookies. BVT uses this only
+              to understand aggregate website usage. The extension itself does not contain
+              Google Analytics.
+            </p>
+          </>
+        ) : (
+          <>
+            <h3>Google Analytics (not enabled on this build)</h3>
+            <p>
+              No Google Analytics measurement ID is configured for this build, so no GA tag
+              is rendered. If a measurement ID is later configured at build time, this
+              section and the site’s script loading will change together.
+            </p>
+          </>
+        )
+      }
+
+      <h2>8. Cookies</h2>
+      <p>
+        This website does not set its own cookies. If Google Analytics is enabled for a
+        build, GA may set its own cookies as described above. The extension uses extension
+        storage, not website cookies, for its settings.
+      </p>
+
+      <h2>9. Third parties</h2>
+      <ul>
+        <li><strong>TikTok</strong> — the public pages you open and the media or page endpoints the extension requests at your direction.</li>
+        <li><strong>Chrome Web Store</strong> — distribution and installation. Its own policies apply.</li>
+        <li><strong>pandahi.cc</strong> — Pro checkout and license validation.</li>
+        <li><strong>Static hosting provider</strong> — website delivery and standard request logs.</li>
+        <li><strong>Google Analytics</strong> — only when enabled for the website build.</li>
+      </ul>
+      <p>
+        BVT does not sell page data. It does not share page data with the subscription
+        server. It does not provide a server-side download or storage service.
+      </p>
+
+      <h2>10. Your choices</h2>
+      <ul>
+        <li>Clear extension settings and local data from the extension or Chrome’s extension settings.</li>
+        <li>Uninstall the extension to remove its local extension storage.</li>
+        <li>Close the page to clear the in-memory panel state.</li>
+        <li>Choose your own download folder, or cancel a download before it completes.</li>
+        <li>Disable or delete cookies in your browser if GA is enabled for a build.</li>
+        <li>Contact support with a privacy question.</li>
+      </ul>
+
+      <h2>11. Contact</h2>
+      <p>
+        For privacy questions or support, email{' '}
+        <a href={`mailto:${SITE.supportEmail}`} class="font-semibold">
+          {SITE.supportEmail}
+        </a>
+        . Do not send account credentials, page data, or subscription tokens in a support
+        request.
+      </p>
+
+      <h2>12. Changes</h2>
+      <p>
+        This policy may change as the extension and website evolve. The "Last updated" date
+        at the top will change when it does. Material changes should be reviewed before the
+        next public release.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-6 text-slate-600">
+        <p class="font-semibold text-slate-900">Independent product</p>
+        <p class="mt-2">
+          BVT is an independent browser extension and is not affiliated with, endorsed by,
+          or sponsored by TikTok or ByteDance. TikTok and related marks are trademarks of
+          their respective owners.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

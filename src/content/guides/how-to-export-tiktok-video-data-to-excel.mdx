@@ -1,0 +1,148 @@
+---
+title: How to Export TikTok Video Data to Excel
+description: "Export selected public TikTok video metadata to an XLSX workbook with BVT. Review the 15 columns, keep the sample context, and avoid overreading the data."
+pubDate: 2026-11-15
+updatedDate: 2026-11-15
+readingTime: 8
+category: Data export
+featureHref: /features/xlsx-export/
+featureLabel: XLSX Export
+related:
+  - how-to-download-a-tiktok-creators-videos
+  - how-to-bulk-download-tiktok-videos
+  - how-to-download-tiktok-videos
+takeaways:
+  - The export contains the selected videos, not the whole platform.
+  - Fifteen columns describe the public fields the page exposes.
+  - Missing values are blank; they are not zero or estimates.
+  - Keep the source URL, date, and filters with the workbook.
+draft: false
+---
+
+import Callout from '../../components/Callout.astro';
+
+A spreadsheet makes a sample look authoritative. That is useful when the sample is clearly defined and dangerous when it is not. BVT’s XLSX export is intentionally narrow: it writes the selected video records and the public fields the page exposes. It does not estimate sales, merge pages, or fill in missing values.
+
+This guide covers the selection, the 15 columns, the checks worth doing before sharing the file, and the limits to state alongside it.
+
+<Callout tone="note" title="Quick answer">
+Select the videos you need in the creator, short drama, or list workflow, then use the BVT export action. The extension writes a local XLSX workbook with one row per selected video. Open it in Excel, Google Sheets, or another spreadsheet tool.
+</Callout>
+
+## Step 1: Build a selection you can explain
+
+The export uses the selected set from the current workflow. That is the same set used for the download actions. Before exporting, be able to answer:
+
+- Which page produced the sample?
+- Which section or list was loaded?
+- Which filters were applied?
+- Did you select individual records or all filtered candidates?
+- Did the selection survive a filter change?
+- How many records should the file contain?
+
+If you cannot answer those questions, the workbook will be difficult to defend even if the columns are correct.
+
+## Step 2: Export the workbook
+
+Use the BVT export action in the current workflow. The extension generates the XLSX locally and saves it through the browser. There is no upload step, no Google Sheets connection, and no Excel add-in.
+
+A workbook can fail to export if no videos are selected or if the page changed during the action. Re-select the records and try again.
+
+## The 15 columns
+
+BVT writes the following fields when the page exposes a value:
+
+| Column | What it contains |
+|---|---|
+| Video ID | The numeric TikTok video identifier |
+| Video Cover | Cover image URL |
+| Video Desc | The video description or caption |
+| Video Detail | A link to the public video detail page |
+| Video Url | The media URL used by the download workflow |
+| isTop | Whether the page marks the item as pinned, where available |
+| Create Date | The publish date exposed by the page |
+| PlayList ID | Playlist identifier when the video belongs to one |
+| PlayList Name | Playlist name when available |
+| Duration | Video duration |
+| Play Count | Public play count |
+| Digg Count | Public like count |
+| Collect Count | Public save/collect count |
+| Comment Count | Public comment count |
+| Share Count | Public share count |
+
+The fields are descriptive, not predictive. A high play count does not tell you whether a video sold a product, changed an opinion, or will perform again.
+
+## Step 3: Check the file before you share it
+
+Open the workbook and spot-check it:
+
+- the row count matches the selected count;
+- the header row is present and readable;
+- a few known videos appear with the expected URLs and dates;
+- missing values are blank rather than zero;
+- the publish dates and durations are in a format your spreadsheet understands;
+- no unrelated records were included.
+
+If the row count is far off, the selection or the page scope is probably not what you expected. Rebuild the sample rather than cleaning around a mismatch.
+
+<Callout tone="tip" title="Keep the raw file">
+Store the original export separately from any cleaned version. Cleaning decisions are easier to audit when the raw file still exists.
+</Callout>
+
+## Step 4: Document the sample
+
+A workbook without context looks more precise than it is. Keep a short note or a second sheet with:
+
+- source page URL;
+- capture date and time;
+- page type and section;
+- filters applied;
+- selection method;
+- row count;
+- known missing fields;
+- the intended use of the file.
+
+That note is often more valuable than an extra column, because it tells a reader what the rows represent.
+
+## What the workbook cannot tell you
+
+BVT does not include sales, revenue, advertising spend, conversion, audience demographics, or historical trends. It does not merge records across pages, tabs, or sessions. It does not refresh counts in the background or guarantee that every public video was loaded.
+
+A missing value means the page did not expose the field. It does not mean zero. Treating blanks as zeros can distort an average or a ranking.
+
+<Callout tone="warning" title="A file is not a license">
+The metadata can describe a public video, but it does not grant permission to reuse the video or the creator’s identity. Confirm the rights for your intended use.
+</Callout>
+
+## A practical export checklist
+
+- ☐ The source page and section are recorded.
+- ☐ The filters and selection method are known.
+- ☐ The selected count is correct.
+- ☐ The workbook row count matches the selection.
+- ☐ A few known records have been spot-checked.
+- ☐ Missing values are blank, not zero.
+- ☐ The source note travels with the file.
+- ☐ The intended use is permitted.
+
+## Common questions
+
+### Can I export every video from a creator?
+
+The export covers the selected videos from the loaded sample. It does not guarantee a complete creator archive, and it does not merge multiple runs.
+
+### Are the counts live?
+
+No. They are a snapshot of the page data at the time of the run. They are not a real-time feed or a historical series.
+
+### Can I open the file in Google Sheets?
+
+Yes. The .xlsx workbook can be imported into Google Sheets or another spreadsheet application. BVT does not connect to your Google account or sync the file.
+
+### Does the export include the video files?
+
+No. The workbook contains metadata. Use the download workflow for the MP4 files.
+
+## Where to go next
+
+For the creator workflow behind the selection, read [How to Download a TikTok Creator’s Videos](/guides/how-to-download-a-tiktok-creators-videos/). For list-page batches, read [How to Bulk Download TikTok Videos](/guides/how-to-bulk-download-tiktok-videos/). The [XLSX Export feature page](/features/xlsx-export/) lists the fields and limits.

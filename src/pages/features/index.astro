@@ -1,0 +1,108 @@
+---
+import CTA from '../../components/CTA.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
+import Icon from '../../components/Icon.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { FEATURES, SITE } from '../../data/site';
+
+const title = 'BVT Features — Single, Bulk & XLSX TikTok Downloads';
+const description =
+  'Explore BVT features for single TikTok video downloads, batch downloads from Search and Explore, creator profile tools, short dramas, and XLSX metadata export.';
+
+const principles = [
+  {
+    icon: 'shield',
+    title: 'Public pages only',
+    text: 'BVT works with the public TikTok pages you open. It does not bypass login, CAPTCHA, region blocks, DRM, or other access controls.',
+  },
+  {
+    icon: 'download',
+    title: 'User-initiated downloads',
+    text: 'Files are requested only when you start a download. BVT does not run a background crawler or build a hidden library.',
+  },
+  {
+    icon: 'info',
+    title: 'Availability is not authorization',
+    text: 'A public video can be technically available and still not be licensed for reuse. Confirm the rights before you republish or use it commercially.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/features/">
+  <section class="relative overflow-hidden border-b border-slate-200 bg-slate-50">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-grid opacity-50">
+    </div>
+    <div class="container-page relative py-16 sm:py-20">
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
+        Features
+      </p>
+      <h1 class="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+        Everything BVT does on a public TikTok page.
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+        Five connected workflows: download a single video, batch a list, work through a
+        creator’s profile, collect short drama episodes, and take the selected metadata
+        into a spreadsheet.
+      </p>
+      <div class="mt-8">
+        <a
+          href="/guides/"
+          class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-800"
+        >
+          See the practical guides
+          <Icon name="arrow" class="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 sm:py-20">
+    <div class="container-page">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+        {FEATURES.map((feature, index) => (
+          <div class:list={['h-full', index < 3 ? 'lg:col-span-2' : 'lg:col-span-3']}>
+            <FeatureCard feature={feature} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-slate-200 bg-slate-50 py-16 sm:py-20">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Shared principles"
+        title="The boundaries are part of the product."
+        description="BVT is deliberately scoped to public pages and user-initiated downloads. Understanding those boundaries is part of using it well."
+      />
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          principles.map((principle) => (
+            <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+                <Icon name={principle.icon} class="h-5 w-5" />
+              </span>
+              <h2 class="mt-4 text-base font-bold text-slate-950">{principle.title}</h2>
+              <p class="mt-2 text-sm leading-6 text-slate-600">{principle.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-8 max-w-3xl text-sm leading-6 text-slate-500">
+        BVT is an independent browser extension and is not affiliated with, endorsed by,
+        or sponsored by TikTok or ByteDance. See the{' '}
+        <a href="/privacy/" class="font-semibold text-brand-700 hover:underline">Privacy Policy</a>{' '}
+        for the data-handling details. The current extension version is {SITE.version}.
+      </p>
+    </div>
+  </section>
+
+  <CTA
+    campaign="features-index"
+    title="Open a public page and use the workflow you need."
+    description="Single downloads are free. Pro unlocks the full batch workflow for list pages, creator profiles, short dramas, and XLSX export."
+    secondaryHref="/guides/"
+    secondaryLabel="Read the guides"
+  />
+</BaseLayout>

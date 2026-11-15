@@ -1,0 +1,18 @@
+---
+interface Props {
+  url?: string;
+  class?: string;
+}
+
+const { url = 'tiktok.com', class: className = '' } = Astro.props;
+---
+
+<div class:list={['browser-frame', className]}>
+  <div class="browser-frame__bar" aria-hidden="true">
+    <div class="browser-frame__dots"><span></span><span></span><span></span></div>
+    <div class="browser-frame__url">{url}</div>
+  </div>
+  <div class="browser-frame__body">
+    <slot />
+  </div>
+</div>

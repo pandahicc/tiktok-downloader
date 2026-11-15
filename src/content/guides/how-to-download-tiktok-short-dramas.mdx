@@ -1,0 +1,124 @@
+---
+title: How to Download TikTok Short Drama Episodes
+description: "Select episodes from a public TikTok short drama with BVT, save them to a folder, or export the selected episode metadata to XLSX."
+pubDate: 2026-11-15
+updatedDate: 2026-11-15
+readingTime: 7
+category: Short drama
+featureHref: /features/short-drama-download/
+featureLabel: Short Drama Download
+related:
+  - how-to-bulk-download-tiktok-videos
+  - how-to-export-tiktok-video-data-to-excel
+  - how-to-download-a-tiktok-creators-videos
+takeaways:
+  - The episode grid is the selection scope for both saving and export.
+  - Not every episode is available in every region or at every time.
+  - A smaller, intentional selection is easier to review than the full drama.
+  - Episodes are still copyrighted works; confirm the rights before reuse.
+draft: false
+---
+
+import Callout from '../../components/Callout.astro';
+
+Short dramas add a second layer to the usual TikTok download problem. A single video page is one file; a drama is a list of episodes, each with its own availability, cover, and metadata. Downloading the whole list is rarely the right first move. A deliberate episode selection is easier to review, easier to store, and easier to explain later.
+
+BVT adds an episode picker to supported public short drama pages. This guide covers the selection workflow, the save and export options, and the limits worth checking before you start.
+
+<Callout tone="note" title="Quick answer">
+Open a public short drama, click the BVT download control, browse the paged episode grid, and select the episodes you need. Save the selection to a folder, or export the selected episode metadata to XLSX.
+</Callout>
+
+## Step 1: Open a supported public short drama
+
+Use the public short drama page and let it render. BVT does not bypass login, CAPTCHA, region restrictions, DRM, or other access controls. If the drama is not available to logged-out visitors, the episode picker cannot make it available.
+
+A drama can be public while individual episodes are not. Region licensing, removals, and page changes can all affect the available list.
+
+## Step 2: Open the episode picker
+
+The BVT download control opens a modal with the available episodes. The grid is paged; use the page controls to move through the list. Each episode is selectable, and the panel shows the selected count next to the actions.
+
+The episode list is the selection scope. If you switch to a different drama, the selection belongs to the drama you are viewing. Recheck the count after any navigation.
+
+## Step 3: Select the episodes you need
+
+You can click individual episodes to select or deselect them, or use the select-all control. For a review, a smaller set is often better:
+
+- select the episodes you have been asked to review;
+- select a range around a specific plot point;
+- select a sample for a translation or editing task;
+- select the episodes that are actually available before planning the rest.
+
+Select-all is useful when the task really is the full available list. It does not create episodes that TikTok does not expose.
+
+<Callout tone="tip" title="Check the count before saving">
+The selected count is shown next to the save and export actions. If it looks wrong, clear the selection and rebuild it before starting a folder write.
+</Callout>
+
+## Step 4: Save to a folder
+
+Choose the save action, then pick a destination folder in the browser prompt. BVT writes the selected episodes as MP4 files into that folder. The panel reports progress and a success or failure count.
+
+A failed episode does not stop the rest of the run. Common failures include:
+
+- no playable source for that episode;
+- an expired media URL;
+- a network interruption;
+- a folder permission that was denied or dismissed;
+- a page change during the write.
+
+If the prompt was dismissed, start the action again and approve the folder request. If an episode fails, check whether it is still available on the page before retrying.
+
+## Step 5: Or export the metadata
+
+The same selection can be exported to XLSX. The workbook contains the selected episode records and the public fields the page exposes, such as video ID, cover, description, detail URL, media URL, create date, duration, playlist context, and engagement counts.
+
+The export is useful when you need a review list, a translation tracker, or a record of what was downloaded. It is not a sales report, a full drama catalog, or a license.
+
+<Callout tone="warning" title="Episodes are copyrighted works">
+Do not redistribute, monetize, or republish episodes without the rights holder’s permission. A public page and a working download do not create a license.
+</Callout>
+
+## Limits to plan around
+
+- BVT can only load episodes the public short drama page makes available.
+- Region restrictions and removals can leave gaps in the episode list.
+- A selected episode still needs a playable source before it can be saved.
+- Basic has limited batch processing; Pro unlocks the full batch workflow.
+- BVT does not merge episode selections across dramas or sessions.
+
+Plan the selection around what is available. If the task requires a complete season and the page does not expose every episode, BVT is not the right tool for that gap.
+
+## A practical episode checklist
+
+1. Open the public short drama and confirm the page is rendered.
+2. Open the BVT episode picker.
+3. Browse the pages and select the episodes you need.
+4. Confirm the selected count.
+5. Choose a dedicated destination folder.
+6. Save the selection and review the failure count.
+7. Export the metadata if you need a review record.
+8. Confirm the rights for the intended use.
+
+## Common questions
+
+### Can I download the whole drama at once?
+
+BVT can select all available episodes, but it cannot add episodes the page does not expose. The result is the available set, not a guarantee of a complete season.
+
+### Why is an episode missing?
+
+It may be region-restricted, removed, not yet available, or missing a playable source. BVT cannot create a missing episode.
+
+### Can I resume a failed folder write?
+
+Reopen the episode picker, reselect the failed episodes, and start the save again. A folder write is not a durable queue.
+
+### Does the XLSX export include the video files?
+
+No. The workbook contains metadata. The video files are saved separately through the folder workflow.
+
+## Where to go next
+
+For list-page batches, read [How to Bulk Download TikTok Videos](/guides/how-to-bulk-download-tiktok-videos/). For the spreadsheet fields, read [How to Export TikTok Video Data to Excel](/guides/how-to-export-tiktok-video-data-to-excel/). The [Short Drama Download feature page](/features/short-drama-download/) lists the selection and save options.

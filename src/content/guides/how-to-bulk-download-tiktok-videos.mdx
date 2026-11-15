@@ -1,0 +1,126 @@
+---
+title: How to Bulk Download TikTok Videos
+description: "Build a batch from Search, Explore, hashtags, or a creator profile with BVT, choose ZIP or folder output, and understand what a batch cannot include."
+pubDate: 2026-11-15
+updatedDate: 2026-11-15
+readingTime: 9
+category: Bulk downloads
+featureHref: /features/bulk-download/
+featureLabel: Bulk Download
+related:
+  - how-to-download-tiktok-videos
+  - how-to-download-a-tiktok-creators-videos
+  - how-to-export-tiktok-video-data-to-excel
+takeaways:
+  - A batch always starts from a defined page and selection.
+  - ZIP is convenient for a small archive; a folder is easier for a large review.
+  - Basic has limited batch processing; Pro unlocks the full workflow.
+  - A batch contains the available cards, not every video on TikTok.
+draft: false
+---
+
+import Callout from '../../components/Callout.astro';
+
+Bulk downloading is less about clicking "download all" and more about defining a selection you can explain. Which page produced the list? Which items did you add? Did the filter change after you selected them? If those answers are unclear, the folder may be full of files while the sample is still unknown.
+
+This guide shows a repeatable BVT batch workflow on Search, Explore, hashtag, and creator pages, then covers ZIP versus folder output and the failures worth checking.
+
+<Callout tone="note" title="Quick answer">
+Open a supported public list page, add the videos you want, review the selected count, then choose ZIP or a destination folder. Failed items are reported separately; refresh and retry if a media URL expired.
+</Callout>
+
+## Step 1: Choose the page that defines the sample
+
+A batch inherits the population of the page you start from:
+
+- **Search results** for a keyword or topic.
+- **Explore** for the discovery feed.
+- **Hashtag pages** for a challenge or theme.
+- **Creator profiles** for one account’s public sections.
+
+Those populations are not interchangeable. A hashtag batch and a creator batch can overlap, but they answer different questions. Write down the page type and URL before you add anything.
+
+## Step 2: Add the videos
+
+Use the add control on each card. Where the page offers selection controls, use them for a larger set. The selected count is your source of truth. Check it before you start the download.
+
+If you change a filter or sort order after selecting, verify that the selection still matches what you expect. A selection that silently survives a filter change can produce a batch that no longer matches the page you are looking at.
+
+## Step 3: Choose ZIP or folder output
+
+BVT supports two output styles for a batch.
+
+### ZIP
+
+The extension builds a local ZIP and sends it through the browser’s download flow. A single archive is convenient when you want to move the batch somewhere else, upload it to a review folder, or keep the files together.
+
+### Save to a folder
+
+The browser asks you to choose a destination folder and grant write access. BVT writes the selected files into that folder. This is usually easier for a large batch, because you can inspect individual files without unpacking an archive.
+
+Both options use the same selected set. Choose based on how you will review the files, not on a belief that one is "better."
+
+<Callout tone="tip" title="Keep the source with the files">
+Create a small note next to the folder with the page URL, capture date, filters, and selection method. Future you will not remember which hashtag or profile produced the batch.
+</Callout>
+
+## Step 4: Watch the progress and the failures
+
+A batch can have successful and failed items in the same run. A failed item does not stop the rest of the queue. Common failures include:
+
+- no playable source for that video;
+- an expired media URL;
+- a network interruption;
+- a folder permission that was dismissed or denied;
+- a page change during the run.
+
+Refresh the page, recreate the selection, and retry the failed items. If most of the batch fails, the page data may have changed or the extension may need an update.
+
+## Basic, Pro, and the real limits
+
+The Basic version includes limited batch processing. Pro unlocks the full batch workflow through an in-app purchase. The extension shows the current plan and limits; this guide does not hard-code numbers that can change.
+
+Plan limits are only one boundary. The bigger constraint is the page:
+
+- BVT processes the videos the page returns or renders.
+- It does not guarantee every video in a search, hashtag, or profile.
+- It does not merge results across pages or sessions.
+- It does not bypass login, CAPTCHA, region blocks, DRM, or rate limits.
+
+A batch is a selected sample of an available page, not a complete TikTok index.
+
+## A practical batch checklist
+
+- ☐ The page type and URL are recorded.
+- ☐ The selection count matches the intended sample.
+- ☐ The output choice (ZIP or folder) is deliberate.
+- ☐ The destination folder is separate from other projects.
+- ☐ Failed items have been reviewed and retried where sensible.
+- ☐ The files play and have the quality you expected.
+- ☐ You have the rights to use each video.
+
+<Callout tone="warning" title="A batch is not a license">
+Downloading many public videos does not give you permission to republish them. Confirm the rights for advertising, client work, or any public reuse. BVT does not provide legal permission.
+</Callout>
+
+## Common questions
+
+### Can I add videos from more than one page?
+
+Not as one merged batch. BVT does not merge selections across pages or sessions. Build and download each page’s selection separately.
+
+### Can I resume a failed batch?
+
+Recreate the selection and retry the failed items. A batch is not a durable queue that survives a page reload.
+
+### Why are some videos skipped?
+
+The page may not expose a playable source for them, the source may have expired, or the item may be unavailable in your region. BVT reports failures instead of inventing a file.
+
+### Does the ZIP include metadata?
+
+No. The ZIP contains the selected MP4 files. Metadata is exported separately as an XLSX workbook.
+
+## Where to go next
+
+For a single video, read [How to Download a TikTok Video on Desktop](/guides/how-to-download-tiktok-videos/). For a creator’s posts, reposts, playlists, or liked videos, read [How to Download a TikTok Creator’s Videos](/guides/how-to-download-a-tiktok-creators-videos/). The [Bulk Download feature page](/features/bulk-download/) lists the selection and output options.

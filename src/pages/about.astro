@@ -1,0 +1,180 @@
+---
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CTA from '../components/CTA.astro';
+import Icon from '../components/Icon.astro';
+import InstallButton from '../components/InstallButton.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../lib/schema';
+import { SITE, SUPPORTED_PAGES } from '../data/site';
+
+const title = 'About BVT — Batch Video Downloader for TikTok';
+const description =
+  'BVT is an independent Chrome extension for single and bulk TikTok video downloads, short drama episodes, and XLSX metadata export. Learn how it is scoped.';
+const jsonLd = [
+  breadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about/' },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/about/" jsonLd={jsonLd}>
+  <section class="border-b border-slate-200 bg-slate-50">
+    <div class="container-page py-10 sm:py-14">
+      <Breadcrumbs
+        items={[
+          { name: 'Home', href: '/' },
+          { name: 'About', href: '/about/' },
+        ]}
+      />
+      <div class="mt-8 max-w-3xl">
+        <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
+          About
+        </p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
+          About BVT
+        </h1>
+        <p class="mt-5 text-lg leading-8 text-slate-600">
+          BVT is an independent Chrome extension for saving public TikTok videos — one at
+          a time, a page at a time, or an episode list at a time — and for taking the
+          selected public metadata into a spreadsheet.
+        </p>
+        <div class="mt-7">
+          <InstallButton campaign="about" label="Add BVT to Chrome" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container-page grid gap-12 py-12 sm:py-16 lg:grid-cols-[minmax(0,1fr)_18rem]">
+    <div class="prose max-w-3xl">
+      <h2>What BVT is</h2>
+      <p>
+        BVT — listed on the Chrome Web Store as{' '}
+        <strong>BVT: Batch Video Downloader for TikTok</strong> — is a browser extension
+        for people who want to save public TikTok videos without opening each one in a
+        separate download site. It supports single video downloads, batch selection from
+        Search, Explore, hashtags, and creator profiles, short drama episodes, ZIP or
+        folder output, and XLSX export of selected metadata.
+      </p>
+      <p>
+        The product is built around a simple constraint: work with the public page the
+        user has opened and the data that page makes available. BVT does not provide a
+        hidden database, a server-side download service, or a complete historical archive
+        of TikTok.
+      </p>
+
+      <h2>What we optimize for</h2>
+      <ul>
+        <li><strong>Speed on the page.</strong> A download should start from the page you are already viewing, without a separate upload or account.</li>
+        <li><strong>Predictable files.</strong> Filename templates, ZIP or folder output, and progress reporting keep saved files recognizable.</li>
+        <li><strong>Local processing.</strong> Page data is handled in the browser and is not uploaded to BVT servers.</li>
+        <li><strong>Honest limits.</strong> Availability depends on the page, and a download is not a license to reuse the content.</li>
+      </ul>
+
+      <h2>Supported pages</h2>
+      <p>
+        BVT supports public video detail pages, creator profiles, Search results, Explore,
+        hashtags, short drama pages, and the Home/Following feed. The current interface is
+        available in 23 languages and follows the browser UI language.
+      </p>
+      <ul>
+        {SUPPORTED_PAGES.map((page) => (
+          <li>{page}</li>
+        ))}
+      </ul>
+
+      <h2>What BVT deliberately does not do</h2>
+      <ul>
+        <li>It does not promise a complete creator archive or every video on TikTok.</li>
+        <li>It does not bypass login, CAPTCHA, region blocks, DRM, or rate limits.</li>
+        <li>It does not re-encode media or guarantee a watermark-free or HD source for every video.</li>
+        <li>It does not estimate sales, revenue, ad spend, or audience demographics.</li>
+        <li>It does not merge downloads or exports across pages, tabs, or sessions.</li>
+        <li>It does not claim affiliation with TikTok or ByteDance.</li>
+      </ul>
+
+      <h2>Current build</h2>
+      <p>
+        The site references extension version <strong>{SITE.version}</strong>. The Chrome
+        Web Store listing is the source of truth for the current public build, plan
+        details, and availability. When the listing changes, the version and feature
+        descriptions on this site should be reviewed.
+      </p>
+
+      <h2>Independence</h2>
+      <p>
+        BVT is an independent product. It is not affiliated with, endorsed by, or
+        sponsored by TikTok or ByteDance. TikTok and related marks are trademarks of their
+        respective owners. BVT does not grant permission to use any video; that permission
+        must come from the rights holder or applicable law.
+      </p>
+
+      <div class="not-prose mt-10 rounded-2xl border border-brand-200 bg-brand-50/70 p-6">
+        <div class="flex gap-4">
+          <Icon name="info" class="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
+          <div>
+            <p class="text-sm font-bold text-slate-950">A note on the website</p>
+            <p class="mt-2 text-sm leading-6 text-slate-700">
+              This is a static product site. It does not include a contact form, account
+              system, or web checkout. Google Analytics is loaded only when a measurement
+              ID is configured for the build, as described in the{' '}
+              <a href="/privacy/" class="font-semibold text-brand-700 hover:underline">Privacy Policy</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="space-y-5">
+      <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-bold text-slate-950">At a glance</h2>
+        <dl class="mt-3 space-y-3 text-sm">
+          <div>
+            <dt class="text-slate-500">Product</dt>
+            <dd class="font-semibold text-slate-900">Chrome extension</dd>
+          </div>
+          <div>
+            <dt class="text-slate-500">Store listing</dt>
+            <dd class="font-semibold text-slate-900">BVT: Batch Video Downloader for TikTok</dd>
+          </div>
+          <div>
+            <dt class="text-slate-500">Current version</dt>
+            <dd class="font-semibold text-slate-900">{SITE.version}</dd>
+          </div>
+          <div>
+            <dt class="text-slate-500">Platform</dt>
+            <dd class="font-semibold text-slate-900">TikTok, public pages only</dd>
+          </div>
+          <div>
+            <dt class="text-slate-500">Interface</dt>
+            <dd class="font-semibold text-slate-900">23 languages</dd>
+          </div>
+          <div>
+            <dt class="text-slate-500">Processing</dt>
+            <dd class="font-semibold text-slate-900">Local browser data</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+        <h2 class="text-sm font-bold text-slate-950">Related</h2>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/features/" class="text-slate-600 hover:text-brand-700">Features</a></li>
+          <li><a href="/guides/" class="text-slate-600 hover:text-brand-700">Guides</a></li>
+          <li><a href="/plans/" class="text-slate-600 hover:text-brand-700">Plans</a></li>
+          <li><a href="/privacy/" class="text-slate-600 hover:text-brand-700">Privacy Policy</a></li>
+          <li><a href="/support/" class="text-slate-600 hover:text-brand-700">Support</a></li>
+          <li><a href="/changelog/" class="text-slate-600 hover:text-brand-700">Changelog</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <CTA
+    campaign="about-final"
+    title="Open a public page and start with a single download."
+    description="Install BVT and try the free workflow. Pro unlocks the full batch workflow when you need it."
+    secondaryHref="/guides/"
+    secondaryLabel="Read the guides"
+  />
+</BaseLayout>
